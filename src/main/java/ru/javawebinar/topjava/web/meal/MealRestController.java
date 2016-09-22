@@ -65,7 +65,8 @@ public class MealRestController {
         LOG.info("getBetween dates {} - {} for time {} - {} for User {}", startDate, endDate, startTime, endTime, userId);
         return MealsUtil.getFilteredWithExceeded(
                 service.getBetweenDates(userId,
-                    startDate != null ? startDate : TimeUtil.MIN_DATE, endDate != null ? endDate : TimeUtil.MAX_DATE),
+                        startDate != null ? startDate : TimeUtil.MIN_DATE,
+                        endDate != null ? endDate : TimeUtil.MAX_DATE),
                 startTime != null ? startTime : LocalTime.MIN,
                 endTime != null ? endTime : LocalTime.MAX,
                 AuthorizedUser.getCaloriesPerDay()
