@@ -1,4 +1,4 @@
-package ru.javawebinar.topjava.model;
+package ru.javawebinar.topjava.to;
 
 import java.time.LocalDateTime;
 
@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
  * 11.01.2015.
  */
 public class MealWithExceed {
+
     private final Integer id;
 
     private final LocalDateTime dateTime;

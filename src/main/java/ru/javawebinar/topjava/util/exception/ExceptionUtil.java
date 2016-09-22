@@ -6,6 +6,7 @@ package ru.javawebinar.topjava.util.exception;
  * Date: 14.05.2014
  */
 public class ExceptionUtil {
+
     public static void checkNotFoundWithId(boolean found, int id) {
         checkNotFound(found, "id=" + id);
     }
