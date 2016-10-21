@@ -19,8 +19,8 @@ import static org.slf4j.LoggerFactory.getLogger;
  * User: gkislin
  * Date: 19.08.2014
  */
-public class UserServlet extends HttpServlet {
-    private static final Logger LOG = getLogger(UserServlet.class);
+public class deprecatedUserServlet extends HttpServlet {
+    private static final Logger LOG = getLogger(deprecatedUserServlet.class);
 
     private AdminRestController adminController;
 

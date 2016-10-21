@@ -24,8 +24,8 @@ import java.util.Objects;
  * User: gkislin
  * Date: 19.08.2014
  */
-public class MealServlet extends HttpServlet {
-    private static final Logger LOG = LoggerFactory.getLogger(MealServlet.class);
+public class deprecatedMealServlet extends HttpServlet {
+    private static final Logger LOG = LoggerFactory.getLogger(deprecatedMealServlet.class);
 
     private MealRestController mealController;
 

@@ -6,7 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ru.javawebinar.topjava.AuthorizedUser;
+import ru.javawebinar.topjava.service.MealService;
 import ru.javawebinar.topjava.service.UserService;
+import ru.javawebinar.topjava.util.MealsUtil;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,8 +18,12 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class RootController {
+
     @Autowired
-    private UserService service;
+    private UserService userService;
+
+    @Autowired
+    private MealService mealService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String root() {
@@ -26,8 +32,15 @@ public class RootController {
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String users(Model model) {
-        model.addAttribute("users", service.getAll());
+        model.addAttribute("users", userService.getAll());
         return "users";
+    }
+
+    @RequestMapping(value = "/meals", method = RequestMethod.GET)
+    public String meals(Model model) {
+       model.addAttribute("meals",
+           MealsUtil.getWithExceeded(mealService.getAll(AuthorizedUser.id()), AuthorizedUser.getCaloriesPerDay()));
+       return "meals";
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
