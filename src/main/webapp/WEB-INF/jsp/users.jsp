@@ -37,11 +37,11 @@
                             <td>${user.roles}</td>
                             <td>
                                 <input type="checkbox"
-                                       <c:if test="${user.enabled}">checked</c:if> id="${user.id}"/>
+                                       <c:if test="${user.enabled}">checked</c:if> onclick="enable($(this), ${user.id}"/>
                             </td>
                             <td><fmt:formatDate value="${user.registered}" pattern="dd-MMMM-yyyy"/></td>
-                            <td><a class="btn btn-xs btn-primary edit" id="${user.id}"><fmt:message key="common.update"/></a></td>
-                            <td><a class="btn btn-xs btn-danger delete" id="${user.id}"><fmt:message key="common.delete"/></a></td>
+                            <td><a class="btn btn-xs btn-primary"><fmt:message key="common.update"/></a></td>
+                            <td><a class="btn btn-xs btn-danger delete" onclick="deleteRow(${user.id})"><fmt:message key="common.delete"/></a></td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -108,42 +108,40 @@
     var datatableApi;
 
     function updateTable() {
-        $.get(ajaxUrl, function (data) {
-            updateTableByData(data);
-        });
+        $.get(ajaxUrl, updateTableByData);
     }
 
     // $(document).ready(function () {
     $(function () {
-        datatableApi = $('#datatable').dataTable({
-            "bPaginate": false,
-            "bInfo": false,
-            "aoColumns": [
+        datatableApi = $('#datatable').DataTable({
+            "paging": false,
+            "info": false,
+            "columns": [
                 {
-                    "mData": "name"
+                    "data": "name"
                 },
                 {
-                    "mData": "email"
+                    "data": "email"
                 },
                 {
-                    "mData": "roles"
+                    "data": "roles"
                 },
                 {
-                    "mData": "enabled"
+                    "data": "enabled"
                 },
                 {
-                    "mData": "registered"
+                    "data": "registered"
                 },
                 {
-                    "sDefaultContent": "Edit",
-                    "bSortable": false
+                    "defaultContent": "Edit",
+                    "orderable": false
                 },
                 {
-                    "sDefaultContent": "Delete",
-                    "bSortable": false
+                    "defaultContent": "Delete",
+                    "orderable": false
                 }
             ],
-            "aaSorting": [
+            "order": [
                 [
                     0,
                     "asc"
@@ -151,6 +149,11 @@
             ]
         });
         makeEditable();
+        $(':checkbox').each(function () {
+            if (!$(this).is(":checked")) {
+                $(this).closest('tr').css("text-decoration", "line-through");
+            }
+        });
     });
 </script>
 </html>
